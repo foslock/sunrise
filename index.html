@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SUNRISE™ — The Future of Morning</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --accent: #f4a234;
+      --accent2: #c4344c;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #06060f;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(24px) saturate(1.5);
+      -webkit-backdrop-filter: blur(24px) saturate(1.5);
+      background: rgba(6, 6, 15, 0.4);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: background 0.4s;
+    }
+
+    .nav-logo {
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .nav-logo sup {
+      font-size: 9px;
+      font-weight: 400;
+      opacity: 0.5;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+
+    .nav-cta {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      padding: 9px 22px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+    .nav-cta:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.25); }
+
+    /* ── TICKER ── */
+    .ticker-wrap {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 200;
+      overflow: hidden;
+      background: rgba(6,6,15,0.7);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 10px 0;
+    }
+    .ticker-track {
+      display: flex;
+      gap: 0;
+      animation: ticker 28s linear infinite;
+      white-space: nowrap;
+    }
+    .ticker-item {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      padding-right: 60px;
+      flex-shrink: 0;
+    }
+    .ticker-item span { color: var(--accent); margin-right: 8px; }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      height: 280vh;
+    }
+
+    .hero-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Sky layers */
+    .sky-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      transition: none;
+    }
+
+    .stars-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .star {
+      position: absolute;
+      background: #fff;
+      border-radius: 50%;
+    }
+
+    .horizon-glow {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 55%;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .sun-wrap {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      z-index: 3;
+      width: 160px;
+      height: 160px;
+      pointer-events: none;
+    }
+
+    .sun {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 50%,
+        #fffde0 0%,
+        #ffe066 25%,
+        #ffb700 50%,
+        #ff7300 75%,
+        transparent 100%
+      );
+    }
+
+    .sun-rays {
+      position: absolute;
+      inset: -40%;
+      border-radius: 50%;
+      opacity: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 960px;
+      padding: 0 40px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 28px;
+    }
+    .hero-eyebrow .live-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 0 0 rgba(74,222,128,0.6);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(74,222,128,0.6); }
+      70%  { box-shadow: 0 0 0 7px rgba(74,222,128,0); }
+      100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); }
+    }
+
+    .hero-title {
+      font-size: clamp(72px, 13vw, 148px);
+      font-weight: 900;
+      line-height: 0.88;
+      letter-spacing: -0.055em;
+      margin-bottom: 36px;
+      background: linear-gradient(160deg, #fff 0%, rgba(255,255,255,0.75) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(17px, 2.2vw, 22px);
+      font-weight: 300;
+      color: rgba(255,255,255,0.55);
+      max-width: 580px;
+      margin: 0 auto 52px;
+      line-height: 1.65;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: #fff;
+      color: #000;
+      padding: 15px 38px;
+      border-radius: 100px;
+      font-size: 15px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s;
+      text-decoration: none;
+      display: inline-block;
+      letter-spacing: -0.01em;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 24px 60px rgba(255,255,255,0.18);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #fff;
+      padding: 15px 38px;
+      border-radius: 100px;
+      font-size: 15px;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.22);
+      cursor: pointer;
+      transition: all 0.25s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.08); }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 44px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.3);
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+    .chevron {
+      width: 18px; height: 18px;
+      border-right: 1.5px solid rgba(255,255,255,0.25);
+      border-bottom: 1.5px solid rgba(255,255,255,0.25);
+      transform: rotate(45deg);
+      animation: bounce 1.6s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%,100% { transform: rotate(45deg) translate(0,0); }
+      50%      { transform: rotate(45deg) translate(4px,4px); }
+    }
+
+    /* ── SHARED SECTION ── */
+    .section-wrap {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 130px 60px;
+    }
+
+    .label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 22px;
+    }
+
+    .section-title {
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 900;
+      letter-spacing: -0.045em;
+      line-height: 0.93;
+      margin-bottom: 28px;
+    }
+
+    .section-sub {
+      font-size: 19px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.45);
+      max-width: 560px;
+      line-height: 1.75;
+    }
+
+    /* ── INTRO ── */
+    #intro { background: #06060f; }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: center;
+    }
+
+    .intro-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-top: 64px;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .stat-box {
+      padding: 32px 28px;
+      border-right: 1px solid rgba(255,255,255,0.07);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .stat-box:nth-child(2n) { border-right: none; }
+    .stat-box:nth-child(3), .stat-box:nth-child(4) { border-bottom: none; }
+
+    .stat-num {
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      background: linear-gradient(135deg, var(--accent) 0%, #f7c948 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-desc { font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.5; }
+
+    /* Sunrise preview card */
+    .sunrise-card {
+      border-radius: 28px;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      background: linear-gradient(
+        to bottom,
+        #08041a 0%,
+        #1e0830 20%,
+        #5a1040 38%,
+        #c0304a 55%,
+        #e86628 70%,
+        #f4a234 82%,
+        #fdd86a 91%,
+        #b8dff5 100%
+      );
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 28%;
+      box-shadow: 0 60px 120px -20px rgba(244,162,52,0.25);
+    }
+    .card-sun {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff5c0 0%, #ffd700 40%, #ff8c00 70%);
+      box-shadow: 0 0 50px 20px rgba(255,195,0,0.35);
+    }
+    .card-badge {
+      position: absolute;
+      top: 24px; right: 24px;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 7px 16px;
+      color: rgba(255,255,255,0.8);
+    }
+    .card-label {
+      position: absolute;
+      bottom: 24px; left: 24px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      font-weight: 500;
+    }
+
+    /* ── MARQUEE DIVIDER ── */
+    .marquee-section {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 22px 0;
+      overflow: hidden;
+      background: rgba(255,255,255,0.015);
+    }
+    .marquee-track {
+      display: flex;
+      animation: marquee 20s linear infinite;
+      white-space: nowrap;
+    }
+    .marquee-item {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.15);
+      padding-right: 56px;
+      flex-shrink: 0;
+    }
+    .marquee-item .dot { color: var(--accent); margin-right: 56px; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── FEATURES ── */
+    #features { background: #040410; }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+    .features-header .section-sub { margin: 0 auto; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.065);
+      border-radius: 26px;
+      padding: 52px 48px;
+      transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 26px;
+      opacity: 0;
+      background: radial-gradient(600px circle at var(--mx,50%) var(--my,50%), rgba(244,162,52,0.06), transparent 40%);
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .feature-card:hover::after { opacity: 1; }
+    .feature-card:hover {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.1);
+      transform: translateY(-5px);
+    }
+
+    .feature-icon {
+      font-size: 36px;
+      margin-bottom: 28px;
+      display: block;
+    }
+    .feature-name {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      margin-bottom: 16px;
+    }
+    .feature-desc {
+      font-size: 15.5px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.75;
+    }
+    .feature-tag {
+      display: inline-block;
+      margin-top: 28px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(244,162,52,0.3);
+      padding: 5px 13px;
+      border-radius: 100px;
+    }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: #06060f; }
+
+    .testimonials-header { text-align: center; margin-bottom: 72px; }
+    .testimonials-header .section-sub { margin: 0 auto; }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .testi-card {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.065);
+      border-radius: 26px;
+      padding: 40px 36px;
+    }
+    .testi-stars { color: #f4a234; font-size: 13px; margin-bottom: 20px; letter-spacing: 3px; }
+    .testi-text {
+      font-size: 15.5px;
+      line-height: 1.72;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 32px;
+      font-style: italic;
+    }
+    .testi-author { display: flex; align-items: center; gap: 14px; }
+    .author-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 15px;
+      flex-shrink: 0;
+    }
+    .author-name { font-weight: 700; font-size: 14px; }
+    .author-role { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+
+    /* ── SPECS ── */
+    #specs { background: #040410; }
+
+    .specs-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-bottom: 64px;
+    }
+
+    .specs-table {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+    .spec-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .spec-row:last-child { border-bottom: none; }
+    .spec-key {
+      padding: 22px 28px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+    .spec-val {
+      padding: 22px 28px;
+      font-size: 15px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* ── PRICING ── */
+    #pricing { background: #06060f; text-align: center; }
+
+    .pricing-card {
+      max-width: 500px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 36px;
+      padding: 64px 52px;
+      position: relative;
+      overflow: hidden;
+      margin-top: 64px;
+    }
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #8b2252, #c4344c, #e8622a, #f4a234, #f7c948);
+    }
+    .pricing-glow {
+      position: absolute;
+      top: -80px; left: 50%; transform: translateX(-50%);
+      width: 300px; height: 200px;
+      background: radial-gradient(ellipse, rgba(244,162,52,0.12), transparent 70%);
+      pointer-events: none;
+    }
+
+    .pricing-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #c4344c, #f4a234);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 100px;
+      margin-bottom: 36px;
+    }
+    .pricing-price {
+      font-size: 108px;
+      font-weight: 900;
+      letter-spacing: -0.07em;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .pricing-period {
+      font-size: 15px;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 52px;
+      letter-spacing: 0.01em;
+    }
+    .pricing-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 48px;
+    }
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 15px;
+      color: rgba(255,255,255,0.65);
+    }
+    .pricing-features li:last-child { border-bottom: none; }
+    .check { color: var(--accent); font-weight: 900; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── CTA ── */
+    #cta {
+      background: linear-gradient(to bottom, #040410, #08041a);
+      text-align: center;
+      padding: 160px 60px;
+    }
+    .cta-inner { max-width: 800px; margin: 0 auto; }
+    .cta-title {
+      font-size: clamp(48px, 8vw, 96px);
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      line-height: 0.9;
+      margin-bottom: 28px;
+    }
+    .cta-sub {
+      font-size: 19px;
+      color: rgba(255,255,255,0.4);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 52px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #030308;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .footer-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 64px 60px 48px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .footer-brand-name {
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+    .footer-brand-desc {
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.25);
+      line-height: 1.8;
+      max-width: 260px;
+    }
+    .footer-col-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.22);
+      margin-bottom: 22px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 12px; }
+    .footer-col a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      font-size: 13.5px;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: rgba(255,255,255,0.75); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 40px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.17);
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .footer-legal { line-height: 1.7; max-width: 780px; }
+
+    /* ── ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; }
+      .section-wrap { padding: 90px 28px; }
+      .intro-grid, .specs-intro { grid-template-columns: 1fr; gap: 48px; }
+      .features-grid, .testi-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      #cta { padding: 100px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo">Sunrise<sup>™</sup></div>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#specs">Specs</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+  </ul>
+  <a href="#cta" class="nav-cta">Experience Now</a>
+</nav>
+
+<!-- ── HERO ── -->
+<div id="hero">
+  <div class="hero-sticky">
+    <!-- Sky background -->
+    <div class="sky-bg" id="skyBg"></div>
+
+    <!-- Stars -->
+    <div class="stars-layer" id="starsLayer"></div>
+
+    <!-- Horizon glow -->
+    <div class="horizon-glow" id="horizonGlow"></div>
+
+    <!-- Sun -->
+    <div class="sun-wrap" id="sunWrap">
+      <div class="sun-rays" id="sunRays"></div>
+      <div class="sun" id="sunDisc"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="live-dot"></div>
+        Happening Now &nbsp;·&nbsp; 5.0 Billion Year Ultra Series
+      </div>
+      <h1 class="hero-title">SUNRISE</h1>
+      <p class="hero-subtitle">
+        Nature's most disruptive ambient experience.<br/>
+        Quantum-optimized photon delivery. Zero latency. Zero cost.<br/>
+        Available once daily, everywhere, for everyone.
+      </p>
+      <div class="hero-buttons">
+        <a href="#cta" class="btn-primary">Get Started — It's Free</a>
+        <a href="#features" class="btn-secondary">See How It Works</a>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <div class="chevron"></div>
+      Scroll to experience
+    </div>
+  </div>
+</div>
+
+<!-- ── MARQUEE DIVIDER ── -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marquee">
+    <!-- Duplicated for seamless loop -->
+    <span class="marquee-item">Free Forever <span class="dot">·</span></span>
+    <span class="marquee-item">Zero Subscription <span class="dot">·</span></span>
+    <span class="marquee-item">Available Globally <span class="dot">·</span></span>
+    <span class="marquee-item">Daily Releases <span class="dot">·</span></span>
+    <span class="marquee-item">Crisp Fresh Air Included <span class="dot">·</span></span>
+    <span class="marquee-item">No Account Required <span class="dot">·</span></span>
+    <span class="marquee-item">Open Source Sky <span class="dot">·</span></span>
+    <span class="marquee-item">Infinite Color Palette <span class="dot">·</span></span>
+    <span class="marquee-item">Free Forever <span class="dot">·</span></span>
+    <span class="marquee-item">Zero Subscription <span class="dot">·</span></span>
+    <span class="marquee-item">Available Globally <span class="dot">·</span></span>
+    <span class="marquee-item">Daily Releases <span class="dot">·</span></span>
+    <span class="marquee-item">Crisp Fresh Air Included <span class="dot">·</span></span>
+    <span class="marquee-item">No Account Required <span class="dot">·</span></span>
+    <span class="marquee-item">Open Source Sky <span class="dot">·</span></span>
+    <span class="marquee-item">Infinite Color Palette <span class="dot">·</span></span>
+  </div>
+</div>
+
+<!-- ── INTRO ── -->
+<section id="intro">
+  <div class="section-wrap">
+    <div class="intro-grid">
+      <div>
+        <p class="label reveal">What Is Sunrise?</p>
+        <h2 class="section-title reveal reveal-delay-1">
+          We didn't build it.<br/>
+          We just showed up.
+        </h2>
+        <p class="section-sub reveal reveal-delay-2">
+          Sunrise is a free, open-atmosphere event that occurs daily at the edge of your horizon.
+          No signup. No waitlist. No freemium tier that limits you to half a sky.
+          Just you, the planet rotating at 1,670 km/h, and an absolutely unhinged light show.
+        </p>
+        <div class="intro-stats reveal reveal-delay-3">
+          <div class="stat-box">
+            <div class="stat-num">299K<span style="font-size:0.5em">km/s</span></div>
+            <div class="stat-desc">Light delivery speed. Unmatched in the industry.</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">4.6B</div>
+            <div class="stat-desc">Years of uptime. No scheduled maintenance.</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">$0</div>
+            <div class="stat-desc">Starting price. Ending price. All prices.</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">1/day</div>
+            <div class="stat-desc">Release cadence. Consistent. Predictable. Inevitable.</div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="sunrise-card">
+          <div class="card-badge">LIVE</div>
+          <div class="card-sun"></div>
+          <div class="card-label">Eastern Horizon — Now</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ── -->
+<section id="features">
+  <div class="section-wrap">
+    <div class="features-header">
+      <p class="label reveal">Core Capabilities</p>
+      <h2 class="section-title reveal reveal-delay-1">
+        Engineered by<br/>nobody. Perfected<br/>over millennia.
+      </h2>
+      <p class="section-sub reveal reveal-delay-2">
+        We audited every feature. Not a single one was built by a team of engineers
+        working out of a loft in San Francisco. We're proud of that.
+      </p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <span class="feature-icon">☀️</span>
+        <div class="feature-name">Photon-Native Architecture™</div>
+        <p class="feature-desc">
+          Our proprietary light delivery system uses exactly zero proprietary technology.
+          Photons travel at the speed of light — because that's just how light works —
+          arriving at your retinas with sub-millisecond latency and no cold starts.
+          Edge-deployed. Very edge. Space-edge.
+        </p>
+        <span class="feature-tag">Revolutionary™</span>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-1">
+        <span class="feature-icon">🎨</span>
+        <div class="feature-name">Atmospheric Color Engine™</div>
+        <p class="feature-desc">
+          Mie scattering meets Rayleigh scattering in an unprecedented cross-atmospheric
+          collaboration, producing a seamless gradient across 16.7 million colors.
+          Purple. Crimson. Burnt orange. Gold. All rendered natively.
+          No GPU required. Your sky is the GPU.
+        </p>
+        <span class="feature-tag">AI-Adjacent™</span>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-1">
+        <span class="feature-icon">💨</span>
+        <div class="feature-name">Crisp Air Integration™</div>
+        <p class="feature-desc">
+          Every Sunrise ships standard with our Fresh Air Module — a cloud-to-ground
+          atmospheric processor delivering negative ions, oxygen, petrichor, and that
+          one smell that makes you feel weirdly nostalgic.
+          No add-on. No upsell. It's just air.
+        </p>
+        <span class="feature-tag">Wellness-Forward™</span>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-2">
+        <span class="feature-icon">🌍</span>
+        <div class="feature-name">Global Zero-Downtime Deployment™</div>
+        <p class="feature-desc">
+          Sunrise ships to every timezone, every continent, every roof, field, and
+          parking lot — simultaneously. No CDN required. No regional outages.
+          No status page. It has never been down. It will never go down.
+          We did not build this and we cannot take it away from you.
+        </p>
+        <span class="feature-tag">Enterprise Ready™</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section id="testimonials">
+  <div class="section-wrap">
+    <div class="testimonials-header">
+      <p class="label reveal">Social Proof</p>
+      <h2 class="section-title reveal reveal-delay-1">
+        People went outside.<br/>They were changed.
+      </h2>
+      <p class="section-sub reveal reveal-delay-2">
+        Thousands of verified humans have experienced Sunrise.
+        Here is what three of them said, paraphrased for maximum impact.
+      </p>
+    </div>
+
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">
+          "I used to pay $14.99/month for an app that played bird sounds over a lo-fi beat.
+          Then I tried Sunrise and the birds were just… already there. Outside.
+          For free. I am processing a lot right now."
+        </p>
+        <div class="testi-author">
+          <div class="author-avatar" style="background: linear-gradient(135deg,#f4a234,#c4344c)">M</div>
+          <div>
+            <div class="author-name">Marcus T.</div>
+            <div class="author-role">Venture Capital Associate, Morning Person (New)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal reveal-delay-1">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">
+          "Sunrise disrupted my entire morning optimization stack. I canceled three subscriptions,
+          deleted two wellness apps, and just opened my window.
+          My Oura ring is confused. I am thriving."
+        </p>
+        <div class="testi-author">
+          <div class="author-avatar" style="background: linear-gradient(135deg,#8b2252,#f4a234)">P</div>
+          <div>
+            <div class="author-name">Priya S.</div>
+            <div class="author-role">Productivity Influencer, Formerly Biohacking</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal reveal-delay-2">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">
+          "The color rendering is unlike anything I've experienced — physical or digital.
+          The gradients alone justify waking up. I tried to leave a 6-star review.
+          The system wouldn't allow it. I understand."
+        </p>
+        <div class="testi-author">
+          <div class="author-avatar" style="background: linear-gradient(135deg,#1a5a8a,#8b2252)">C</div>
+          <div>
+            <div class="author-name">Chad W.</div>
+            <div class="author-role">Early Adopter, Currently Outdoors</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SPECS ── -->
+<section id="specs">
+  <div class="section-wrap">
+    <div class="specs-intro">
+      <div>
+        <p class="label reveal">Technical Specifications</p>
+        <h2 class="section-title reveal reveal-delay-1">
+          The numbers<br/>speak. Loudly.<br/>For free.
+        </h2>
+        <p class="section-sub reveal reveal-delay-2">
+          We asked our team to compile a technical spec sheet.
+          They went outside and looked at the sky.
+          These are the numbers they came back with.
+        </p>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="specs-table">
+          <div class="spec-row"><div class="spec-key">Color Depth</div><div class="spec-val">16.7M+ colors (natural)</div></div>
+          <div class="spec-row"><div class="spec-key">Refresh Rate</div><div class="spec-val">Once daily, no exceptions</div></div>
+          <div class="spec-row"><div class="spec-key">Latency</div><div class="spec-val">Speed of light (c)</div></div>
+          <div class="spec-row"><div class="spec-key">Coverage</div><div class="spec-val">Global, 100% uptime</div></div>
+          <div class="spec-row"><div class="spec-key">Compatibility</div><div class="spec-val">Any functioning eyes</div></div>
+          <div class="spec-row"><div class="spec-key">Requirements</div><div class="spec-val">Facing east, roughly</div></div>
+          <div class="spec-row"><div class="spec-key">Carbon Footprint</div><div class="spec-val">Net zero*</div></div>
+          <div class="spec-row"><div class="spec-key">Subscription</div><div class="spec-val">Never. Never ever.</div></div>
+          <div class="spec-row"><div class="spec-key">Battery Life</div><div class="spec-val">~5 billion years</div></div>
+          <div class="spec-row" style="border:none"><div class="spec-key">Fresh Air</div><div class="spec-val">Included. Always.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section id="pricing">
+  <div class="section-wrap">
+    <p class="label reveal">Transparent Pricing</p>
+    <h2 class="section-title reveal reveal-delay-1">Simple. Honest.<br/>Aggressively free.</h2>
+    <p class="section-sub reveal reveal-delay-2" style="margin: 0 auto;">
+      We explored tiered pricing. We explored a freemium model.
+      We explored a token-based access system with a waitlist.
+      Then we remembered it's a sunrise.
+    </p>
+
+    <div class="pricing-card reveal">
+      <div class="pricing-glow"></div>
+      <div class="pricing-badge">Most Popular Plan</div>
+      <div class="pricing-price">$0</div>
+      <div class="pricing-period">per morning · per lifetime · per everything</div>
+      <ul class="pricing-features">
+        <li><span class="check">✓</span> Full 180° panoramic sky viewport</li>
+        <li><span class="check">✓</span> Daily photon delivery, zero surcharges</li>
+        <li><span class="check">✓</span> Unlimited atmospheric color gradients</li>
+        <li><span class="check">✓</span> Fresh Air Module — included, always</li>
+        <li><span class="check">✓</span> Bird audio (where available, varies by ecosystem)</li>
+        <li><span class="check">✓</span> Cloud formations at no extra cost</li>
+        <li><span class="check">✓</span> Priority access: just wake up slightly earlier</li>
+        <li><span class="check">✓</span> The crisp, quiet feeling that everything is going to be fine</li>
+      </ul>
+      <a href="#cta" class="btn-primary" style="width:100%;text-align:center;display:block;">
+        Get Started — It's Still Free
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section id="cta">
+  <div class="cta-inner">
+    <p class="label reveal" style="justify-content:center;display:flex">The Future Is Now. Outside.</p>
+    <h2 class="cta-title reveal reveal-delay-1">
+      Go watch<br/>the sunrise.
+    </h2>
+    <p class="cta-sub reveal reveal-delay-2">
+      Just go outside tomorrow morning. It's free. It's always been free.<br/>
+      Set an alarm. Face east. Breathe in. You're done.
+    </p>
+    <div class="reveal reveal-delay-3" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="#" class="btn-primary">Experience Sunrise</a>
+      <a href="#features" class="btn-secondary">Learn More About Sky</a>
+    </div>
+    <p class="reveal reveal-delay-4" style="margin-top:40px;font-size:13px;color:rgba(255,255,255,0.2);">
+      No account required. No email. No notification asking to rate your experience.
+    </p>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name">SUNRISE™</div>
+        <p class="footer-brand-desc">
+          The world's most democratized ambient visual experience.
+          Occurring daily since approximately 4.6 billion years ago.
+          We had nothing to do with it.
+        </p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Product</div>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#specs">Specifications</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Science</div>
+        <ul>
+          <li><a href="#">Rayleigh Scattering</a></li>
+          <li><a href="#">The Photon</a></li>
+          <li><a href="#">Earth's Rotation</a></li>
+          <li><a href="#">The Atmosphere</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <ul>
+          <li><a href="#">About The Sun</a></li>
+          <li><a href="#">Careers (Outside)</a></li>
+          <li><a href="#">Press Kit</a></li>
+          <li><a href="#">Contact (Go Outside)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        * Carbon footprint is net zero assuming you don't drive to see it.
+        Sunrise™ is not affiliated with The Sun, any government, any atmosphere, or any morning.
+        Results may vary based on hemisphere, season, cloud coverage, and willingness to get out of bed.
+        Sunrise™ is a trademark of no one. All rights unreserved.
+        The sky is not a product. Please go outside.
+      </div>
+      <div>© The Universe. All Eons Reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ── BOTTOM TICKER ── -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item"><span>☀️</span> Available Now · Zero Cost · Face East · Breathe · <span>☀️</span> Available Now · Zero Cost · Face East · Breathe · </span>
+    <span class="ticker-item"><span>☀️</span> Available Now · Zero Cost · Face East · Breathe · <span>☀️</span> Available Now · Zero Cost · Face East · Breathe · </span>
+  </div>
+</div>
+
+<script>
+  /* ─── SUNRISE SCROLL ANIMATION ─── */
+
+  // Color stops for the scroll-linked gradient
+  // Each stop: [t, topR,topG,topB, midR,midG,midB, horizR,horizG,horizB]
+  const stops = [
+    // t=0  — deep night, pre-dawn
+    [0.00,  8, 4, 26,   13, 8, 42,   26, 10, 52],
+    // t=0.15 — first whisper of purple
+    [0.15,  8, 4, 26,   36, 12, 80,   74, 20, 74],
+    // t=0.32 — dawn purple intensifies
+    [0.32,  8, 4, 26,   74, 20, 74,   139, 34, 82],
+    // t=0.48 — deep rose/crimson on horizon
+    [0.48,  6, 4, 22,   100, 22, 62,   196, 52, 76],
+    // t=0.62 — fiery red-orange
+    [0.62,  8, 10, 28,   160, 40, 50,   232, 98, 42],
+    // t=0.74 — orange gold
+    [0.74,  10, 18, 38,   220, 110, 30,   244, 162, 52],
+    // t=0.85 — golden yellow
+    [0.85,  12, 32, 60,   240, 180, 40,   247, 210, 80],
+    // t=1.0  — morning sky blue
+    [1.00,  26, 110, 170,  100, 185, 220,  135, 206, 235],
+  ];
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function getColors(t) {
+    // clamp
+    t = Math.max(0, Math.min(1, t));
+
+    // find surrounding stops
+    let lo = stops[0], hi = stops[stops.length - 1];
+    for (let i = 0; i < stops.length - 1; i++) {
+      if (t >= stops[i][0] && t <= stops[i+1][0]) {
+        lo = stops[i]; hi = stops[i+1]; break;
+      }
+    }
+
+    const span = hi[0] - lo[0];
+    const s = span === 0 ? 0 : (t - lo[0]) / span;
+
+    return {
+      top:     [lerp(lo[1],hi[1],s), lerp(lo[2],hi[2],s), lerp(lo[3],hi[3],s)],
+      mid:     [lerp(lo[4],hi[4],s), lerp(lo[5],hi[5],s), lerp(lo[6],hi[6],s)],
+      horizon: [lerp(lo[7],hi[7],s), lerp(lo[8],hi[8],s), lerp(lo[9],hi[9],s)],
+    };
+  }
+
+  function rgb(c) { return `rgb(${c[0]|0},${c[1]|0},${c[2]|0})`; }
+
+  const skyBg       = document.getElementById('skyBg');
+  const starsLayer  = document.getElementById('starsLayer');
+  const horizonGlow = document.getElementById('horizonGlow');
+  const sunWrap     = document.getElementById('sunWrap');
+  const sunRays     = document.getElementById('sunRays');
+  const sunDisc     = document.getElementById('sunDisc');
+  const heroEl      = document.getElementById('hero');
+
+  // Generate stars
+  (function buildStars() {
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < 180; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      const size = Math.random() < 0.15 ? 2.5 : Math.random() < 0.4 ? 1.8 : 1.2;
+      s.style.cssText = `
+        width:${size}px; height:${size}px;
+        top:${Math.random()*75}%;
+        left:${Math.random()*100}%;
+        opacity:${0.3 + Math.random()*0.7};
+      `;
+      frag.appendChild(s);
+    }
+    starsLayer.appendChild(frag);
+  })();
+
+  function updateHero() {
+    const heroHeight = heroEl.offsetHeight - window.innerHeight;
+    const scrolled   = window.scrollY;
+    const t          = Math.max(0, Math.min(1, scrolled / heroHeight));
+
+    const c = getColors(t);
+
+    // Sky gradient
+    skyBg.style.background = `linear-gradient(
+      to bottom,
+      ${rgb(c.top)} 0%,
+      ${rgb(c.mid)} 45%,
+      ${rgb(c.horizon)} 100%
+    )`;
+
+    // Stars fade out by t=0.4
+    const starsOpacity = Math.max(0, 1 - t / 0.35);
+    starsLayer.style.opacity = starsOpacity;
+
+    // Horizon glow
+    // Strongest around t = 0.55–0.7 (orange/red sunrise)
+    const glowIntensity = t < 0.2 ? 0
+                        : t < 0.55 ? ((t - 0.2) / 0.35) * 0.7
+                        : t < 0.75 ? 0.7
+                        : Math.max(0, 0.7 - (t - 0.75) / 0.25 * 0.5);
+
+    const glowR = c.horizon[0]|0, glowG = c.horizon[1]|0, glowB = c.horizon[2]|0;
+    horizonGlow.style.background = `radial-gradient(
+      ellipse at 50% 100%,
+      rgba(${glowR},${glowG},${glowB},${(glowIntensity * 0.8).toFixed(2)}) 0%,
+      transparent 70%
+    )`;
+
+    // Sun: rises from below the fold
+    // Sun starts becoming visible at t=0.25, fully visible by t=0.5
+    // Position: starts at y=110% (below), reaches ~35% by t=1
+    const sunVisible = t < 0.2 ? 0 : Math.min(1, (t - 0.2) / 0.3);
+    const sunY = t < 0.2 ? 110 : 110 - (t - 0.2) / 0.8 * 95; // 110% → 15%
+
+    sunWrap.style.opacity = sunVisible;
+    // We move the sun via bottom position
+    // At t=0.2, bottom=0 (bottom of screen) => sun peeks up
+    // At t=1, sun is high up
+    const sunBottomPct = t < 0.2 ? -10 : ((t - 0.2) / 0.8) * 65;
+    sunWrap.style.bottom = `${sunBottomPct}%`;
+
+    // Sun glow intensifies then softens to golden
+    const rayOpacity = t < 0.5 ? 0 : Math.min(0.5, (t - 0.5) / 0.3 * 0.5);
+    const glowColor1 = t < 0.65 ? `rgba(255,120,0,0.45)` : `rgba(255,200,0,0.35)`;
+    const glowColor2 = t < 0.65 ? `rgba(255,80,0,0.2)`   : `rgba(255,160,0,0.15)`;
+    sunDisc.style.boxShadow = `0 0 60px 24px ${glowColor1}, 0 0 140px 70px ${glowColor2}`;
+    sunRays.style.opacity   = rayOpacity;
+    if (rayOpacity > 0) {
+      sunRays.style.background = `radial-gradient(circle, rgba(255,220,100,0.25) 0%, transparent 70%)`;
+    }
+  }
+
+  window.addEventListener('scroll', updateHero, { passive: true });
+  updateHero(); // initial call
+
+  /* ─── REVEAL ON SCROLL ─── */
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer  = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  /* ─── FEATURE CARD SPOTLIGHT ─── */
+  document.querySelectorAll('.feature-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+      card.style.setProperty('--my', `${e.clientY - rect.top}px`);
+    });
+  });
+</script>
+
+</body>
+</html>
