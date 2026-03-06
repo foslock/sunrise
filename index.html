@@ -83,38 +83,6 @@
     }
     .nav-cta:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.25); }
 
-    /* ── TICKER ── */
-    .ticker-wrap {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      z-index: 200;
-      overflow: hidden;
-      background: rgba(6,6,15,0.7);
-      backdrop-filter: blur(12px);
-      border-top: 1px solid rgba(255,255,255,0.05);
-      padding: 10px 0;
-    }
-    .ticker-track {
-      display: flex;
-      gap: 0;
-      animation: ticker 28s linear infinite;
-      white-space: nowrap;
-    }
-    .ticker-item {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
-      padding-right: 60px;
-      flex-shrink: 0;
-    }
-    .ticker-item span { color: var(--accent); margin-right: 8px; }
-    @keyframes ticker {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
-
     /* ── HERO ── */
     #hero {
       position: relative;
@@ -1180,13 +1148,6 @@
   </div>
 </footer>
 
-<!-- ── BOTTOM TICKER ── -->
-<div class="ticker-wrap">
-  <div class="ticker-track">
-    <span class="ticker-item"><span>☀️</span> Available Now · Zero Cost · Face East · Breathe · <span>☀️</span> Available Now · Zero Cost · Face East · Breathe · </span>
-    <span class="ticker-item"><span>☀️</span> Available Now · Zero Cost · Face East · Breathe · <span>☀️</span> Available Now · Zero Cost · Face East · Breathe · </span>
-  </div>
-</div>
 
 <script>
   /* ─── SUNRISE SCROLL ANIMATION ─── */
